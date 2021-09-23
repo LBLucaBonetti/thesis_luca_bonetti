@@ -1,0 +1,39 @@
+\documentclass[12pt,a4paper,oneside]{book}
+\usepackage[italian]{babel}
+\renewcommand{\baselinestretch}{1.5} 
+\usepackage[]{frontespizio}
+
+\begin{document}
+
+\begin{frontespizio}
+\Rientro {1.5cm}
+\Margini {1.5cm}{1.5cm}{1.5cm}{1cm}
+\Universita {Modena e Reggio Emilia}
+\Dipartimento {Scienze Fisiche, Informatiche e Matematiche}
+\Corso [Laurea]{Informatica}
+\Annoaccademico {2021-2022}
+\Titoletto {Tesi di Laurea}
+\Titolo {Titolo della tesi...}
+\Candidato []{Luca Bonetti}
+\Preambolo{\renewcommand{\frontsmallfont}[1]{\small}}
+\Relatore {Chiar.mo Prof. Giacomo Cabri}
+\end{frontespizio}
+
+\newpage
+\begin{flushright}
+\null\vspace{\stretch{1}}
+\textit{Tesi.}
+\vspace{\stretch{1}}\null
+\end{flushright}
+
+\tableofcontents
+
+\input{_chapters/introduction.tex}
+\input{_chapters/conclusion.tex}
+
+\appendix
+
+\bibliographystyle{plain}
+\bibliography{thesis}
+
+\end{document}
