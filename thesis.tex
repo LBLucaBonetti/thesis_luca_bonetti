@@ -1,3 +1,15 @@
+% SOMMARIO E LINEE GUIDA
+
+% 1) Introduzione (finalità del tirocinio a grandi linee)
+% 2) L'azienda (settore di competenza, prodotti principali)
+% 3) Il progetto (da dove nasce l'esigenza, quali sono gli scopi)
+% 4) L'architettura (REST)
+% 5) Le tecnologie (Spring Boot, Angular, ...)
+% 6) Le funzionalità implementate (inserimento delle ore tramite form, inserimento di un'immagine per la firma del rapporto di lavoro, compilazione in PDF di un rapporto, ...)
+% 7) Le integrazioni (il software comunica direttamente con un'API di una estensione di Atlassian Jira, con un database Oracle di uno dei prodotti interni aziendali, integra un modulo di invio email, in fase di autenticazione/autorizzazione si sfrutta LDAP della intranet aziendale, ...)
+% 8) Il debito tecnico (mia mancanza di conoscenza generale, best practices, ...)
+% 9) Conclusioni
+
 \documentclass[12pt,a4paper,oneside]{book}
 \usepackage[italian]{babel}
 \renewcommand{\baselinestretch}{1.5} 
@@ -28,8 +40,15 @@
 
 \tableofcontents
 
-\input{_chapters/introduction.tex}
-\input{_chapters/conclusion.tex}
+\input{_chapters/1_introduction.tex}
+\input{_chapters/2_company.tex}
+\input{_chapters/3_project.tex}
+\input{_chapters/4_architecture.tex}
+\input{_chapters/5_technologies.tex}
+\input{_chapters/6_functionalities.tex}
+\input{_chapters/7_integrations.tex}
+\input{_chapters/8_technical_debt.tex}
+\input{_chapters/9_conclusions.tex}
 
 \appendix
 
