@@ -1,1 +1,30 @@
 \chapter{Il progetto}\label{c:project}
+
+In un contesto aziendale come quello descritto nel capitolo \ref{c:company}, è necessaria un'organizzazione del lavoro precisa, puntuale e soprattutto condivisa da parte dei diversi team.
+È infatti impensabile che differenti unità di lavoro non condividano mezzi efficaci per le attività interdipartimentali come la pianificazione e la gestione dei compiti.
+Un ulteriore importante aspetto è legato alla compilazione dei rapporti d'intervento effettuati presso i clienti.
+Questi costituiscono un rendiconto delle operazioni svolte su software e hardware, devono essere appositamente controfirmati da un responsabile dell'azienda presso la quale viene svolto il lavoro
+e vanno consegnati all'amministrazione per l'emissione delle fatture di pagamento.
+\\
+INFOLOG mette a disposizione dei propri dipendenti diverse tecnologie a supporto della stesura di tali documenti:
+\begin{itemize}
+    \item Un software locale offline
+    \item Un modulo stampabile e compilabile a mano
+    \item Una parte di Unitegy che consente di esportare un file in formato PDF
+\end{itemize}
+Il progetto proposto si pone l'obiettivo di unificare le diverse modalità con cui vengono compilati i rapporti d'intervento, integrandosi coi sistemi aziendali esistenti.
+Un'unica piattaforma che riunisca tutti i documenti emessi consentirà all'amministrazione una maggiore autonomia e faciliterà l'emissione delle fatture, consentendo una progressiva
+migrazione dei dati esistenti di diversa natura, una progressiva dismissione dei vecchi servizi e fornirà altresì un singolo punto dal quale reperire le informazioni.
+\\
+Le esigenze di modernità e di fruibilità del sistema hanno portato alla decisione di realizzare un portale web fruibile da browser su differenti dispositivi, eventualmente
+convertibile in app per smartphone in un secondo momento.
+Dovranno essere messe in campo diverse integrazioni per consentire a tutti gli utenti interni all'azienda di poter fruire dei servizi a loro dedicati.
+I programmatori del reparto Logistics, in particolare, dovranno essere in grado di utilizzare il software Atlassian Jira tramite il portale;
+questo particolare programma consente una migliore gestione dello sviluppo attraverso la frammentazione delle caratteristiche da implementare in unità semplici e permette, attraverso
+un vasto panorama di plug-in installabili, di gestire aspetti avanzati come le ore uomo impiegate su un singolo compito.
+Gli utenti Logistics avranno la possibilità di inserire direttamente i task di Atlassian Jira nei rapporti d'intervento, annettendo automaticamente le informazioni relative alle ore uomo.
+Per il resto degli utenti, sarà invece possibile l'inserimento manuale di suddetti dati.
+\\
+Lo stack tecnologico scelto per la produzione del software rispecchia le moderne tendenze in ambito enterprise.
+Data la pregressa esperienza di INFOLOG in merito, è stata scelta la realizzazione di una API sul modello RESTful con Spring Boot per esporre i servizi ed elaborare i dati
+e di un applicativo Single Page Application con Angular per la parte grafica.
