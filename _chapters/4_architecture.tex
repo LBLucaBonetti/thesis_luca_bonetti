@@ -1,1 +1,28 @@
 \chapter{L'architettura}\label{c:architecture}
+
+Come anticipato nel capitolo \ref{c:project}, l'architettura del sistema progettato segue il modello API RESTful.
+Questa tipologia di paradigma parte dal concetto di interazione client/server e comprende una netta suddivisione tra gli aspetti legati alla logica di presentazione dei dati e quelli legati alla loro elaborazione e memorizzazione.
+Nel complesso, questa separazione si concretizza tipicamente nella produzione di due progetti quasi completamente indipendenti.
+L'unico nesso tra queste due parti, chiamate frontend per la presentazione e backend per elaborazione e memorizzazione, è l'interfaccia di comunicazione.
+Il protocollo HTTP funge da unico collante per la trasmissione dei dati in entrambi i sensi.
+\\
+La struttura teorica prevede la costruzione di differenti punti di contatto, detti endpoint, che il frontend richiama quando necessita di uno o più dati.
+Questi punti di contatto possono restituire informazioni, come nel caso di chiamate HTTP di tipo GET, possono memorizzarne, come nel caso di chiamate HTTP di tipo POST, possono modificare
+la situazione esistente, come nel caso di chiamate HTTP di tipo PUT o PATCH e possono eliminare entità persistenti, attraverso chiamate HTTP di tipo DELETE.
+Va precisato che il mapping tra funzionalità e verbi HTTP non rende di per sé una API RESTful.
+\\
+In un'architettura di tipo client/server, un server espone servizi verso uno o più client che lo interrogano per usufruire dei servizi esposti.
+Il server è responsabile della manutenzione della sessione di ogni client che comunica con esso.
+La sessione rappresenta sostanzialmente l'insieme dei dati che servono a identificare l'utente e a distinguere le richieste consentite in base a quelle precedenti.
+REST, acronimo di REpresentational State Transfer, non sfugge a questa definizione ma definisce una netta differenza.
+Il paradigma è stato introdotto nella tesi di dottorato di Roy Fielding \cite{fielding2000architectural}, celebre informatico statunitense contemporaneo.
+Rispetto al tradizionale concetto di stato persistente mantenuto all'interno della parte server dell'applicativo, questo nuovo approccio definisce la comunicazione verso il server come stateless, ovvero senza stato.
+In quest'ottica, un client che intenda usufruire di un servizio del server dovrà fornire ad esso tutti i dati necessari perché la propria richiesta sia soddisfatta.
+Il server, d'altro canto, non avrà alcuna memoria rispetto alle differenti richieste giunte dal client, da cui la definizione di stateless (senza stato).
+Il principale vantaggio di non avere una sessione mantenuta nel backend è un enorme alleggerimento nella gestione di client differenti e/o non omogenei.
+Il ruolo del client, tuttavia, subisce un netto cambiamento: la sessione deve ora essere immagazzinata, infatti, in questa porzione dell'applicativo.
+A partire dalla dissertazione con cui Fielding introdusse nel 2000 questo nuovo stile architetturale, REST è diventato uno standard de-facto per i più recenti servizi internet.
+Il progressivo arricchimento delle risorse disponibili ai client ha reso la manutenzione di una sessione progressivamente meno esosa in termini di costi di elaborazione e ha sicuramente favorito la diffusione del pattern.
+Un ulteriore aspetto che ha permesso a diverse aziende di adottare REST come metodologia di sviluppo standard per sistemi distribuiti e non è l'indipendenza tra frontend e backend.
+Fin tanto che l'interfaccia tra le due parti non viene modificata, infatti, i due progetti possono evolvere indipendentemente l'uno rispetto all'altro e possono essere realizzati da team differenti o perfino da società diverse.
+\\
