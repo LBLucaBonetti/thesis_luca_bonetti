@@ -19,11 +19,21 @@ migrazione dei dati esistenti di diversa natura, una progressiva dismissione dei
 Le esigenze di modernità e di fruibilità del sistema hanno portato alla decisione di realizzare un portale web fruibile da browser su differenti dispositivi, eventualmente
 convertibile in app per smartphone in un secondo momento.
 Dovranno essere messe in campo diverse integrazioni per consentire a tutti gli utenti interni all'azienda di poter fruire dei servizi a loro dedicati.
-I programmatori del reparto Logistics, in particolare, dovranno essere in grado di utilizzare il software Atlassian Jira tramite il portale;
+A tale scopo, dovrà essere integrato il servizio di autenticazione LDAP fornito da Microsoft Active Directory, presente all'interno dei server aziendali e gestito dal reparto IT.
+I programmatori del reparto Logistics, inoltre, dovranno essere in grado di utilizzare il software Atlassian Jira tramite il portale;
 questo particolare programma consente una migliore gestione dello sviluppo attraverso la frammentazione delle caratteristiche da implementare in unità semplici e permette, attraverso
 un vasto panorama di plug-in installabili, di gestire aspetti avanzati come le ore uomo impiegate su un singolo compito.
 Gli utenti Logistics avranno la possibilità di inserire direttamente i task di Atlassian Jira nei rapporti d'intervento, annettendo automaticamente le informazioni relative alle ore uomo.
 Per il resto degli utenti, sarà invece possibile l'inserimento manuale di suddetti dati.
+Dovrà essere consentita la registrazione delle firme dei clienti e dei dipendenti tramite tablet o dispositivo idoneo; un utente della piattaforma potrà inserire una firma di default
+da poter applicare direttamente al rapporto d'intervento senza avere la necessità di immetterla di volta in volta.
+Dovrà essere possibile l'invio del rapporto compilato a un particolare indirizzo email, sia esso quello del cliente o dell'amministrazione interna o esterna, tramite un account di
+Microsoft Office 365 opportunamente configurato e attraverso il protocollo SMTP.
+I dati dei clienti per la compilazione dei rapporti dovranno essere letti direttamente da una particolare vista messa a disposizione dai programmatori di Unitegy; allo stesso modo, 
+i rapporti compilati dovranno essere scritti e dunque inseriti direttamente in un'altra vista dello stesso database Oracle.
+Infine, il progetto dovrà supportare un proprio database PostgreSQL integrato, per memorizzare i rapporti d'intervento compilati in modo centralizzato.
+Questo offrirà ridondanza all'intero processo di gestione dei report, perché se uno tra i sistemi Unitegy e quello del progetto dovesse subire danneggiamenti ai dati, l'altro
+offrirebbe comunque un backup allineato degli stessi.
 \\
 Lo stack tecnologico scelto per la produzione del software rispecchia le moderne tendenze in ambito enterprise.
 Data la pregressa esperienza di INFOLOG in merito, è stata scelta la realizzazione di una API sul modello RESTful con Spring Boot per esporre i servizi ed elaborare i dati
