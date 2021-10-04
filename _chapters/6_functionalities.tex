@@ -1,1 +1,69 @@
 \chapter{Le funzionalità implementate}\label{c:functionalities}
+
+ReportManager è stato realizzato con un approccio basato su singole unità di lavoro da realizzarsi in tre mesi.
+Durante il primo mese, a seguito dell'introduzione in azienda e alla raccolta delle esigenze di progetto, ci si è concentrati sulla scelta e sul successivo apprendimento delle basi
+delle due tecnologie impiegate: Angular e Spring Boot.
+È stato necessario un cambio di paradigma fin da subito perché durante i corsi frequentati all'università non ci si era mai soffermati sull'uso delle API RESTful per il
+backend; la metodologia vista durante le lezioni era sempre stata quella che viene oggi definita come Server Side Rendering (SSR), nella quale un framework di backend si occupa
+di elaborare anche la parte di presentazione grafica dei dati tramite pagine HTML che vengono poi eventualmente aggiornate dinamicamente pur restando interamente prodotte
+dal server dell'applicativo che tiene traccia anche della sessione utente.
+Sciolti i dubbi architetturali, il secondo mese ha visto la realizzazione di mockup iniziali che schematizzassero i flussi informativi da instaurare e della parte più consistente
+del progetto.
+Il terzo mese è stato dedicato infine a ultimare le caratteristiche volute e ad aggiustare dettagli di usabilità e di interazione tra frontend e backend.
+Al termine del periodo, è stato eseguito un deploy locale di test su macchina virtuale per verificare l'effettivo funzionamento delle dinamiche costruite.
+Il deploy è la fase di distribuzione del software, l'ultimo passo per rendere produttivo quanto realizzato.
+Solitamente viene eseguito da reparti specializzati in collaborazione con gli sviluppatori ma date le finalità del lavoro in oggetto è stato scelto di simularlo.
+\\
+Il primo scoglio da superare è stato integrare il sistema aziendale di autenticazione dei dipendenti con la piattaforma.
+In un primo momento sono stati organizzati incontri con i tecnici del settore IT che si occupano della manutenzione interna di tale infrastruttura; dalle riunioni, è
+emerso che la tecnologia di riferimento utilizzata è Microsoft Active Directory.
+Questo sistema utilizza il protocollo Lightweight Directory Access Protocol (LDAP) per gestire e memorizzare i dati di tutto il personale di INFOLOG.
+Vengono immagazzinati in una struttura gerarchica i nomi degli utenti, le password di accesso e i permessi di lettura e scrittura sulle cartelle della rete locale condivisa internamente.
+Si tratta dunque di uno standard per gestire completamente e in modo centralizzato quali operazioni sono consentite alle diverse figure e ai diversi ruoli tra gli impiegati.
+Per certi versi, un sistema di naming (così viene definito) come LDAP condivide caratteristiche col sistema di risoluzione dei nomi DNS che si utilizza quotidianamente per associare
+un indirizzo IP a una stringa URL di una risorsa sul web durante la navigazione.
+Nel caso specifico di INFOLOG, le risorse di interesse sono gli utenti che faranno parte di ReportManager e l'identificazione degli stessi si ottiene dal nodo della gerarchia
+identificato dai parametri standardizzati dalla specifica denominata X.500; in particolare:
+\begin{itemize}
+    \item OU: unità organizzativa
+    \item DC: componente di dominio
+    \item DC: sottocomponente di dominio
+\end{itemize}
+Messi a fuoco questi tre punti, è stato ricercato un componente di Spring Boot che fornisse una API chiara e semplice per integrare questo tipo di autenticazione.
+La scelta è ricaduta sul componente ActiveDirectoryLdapAuthenticationProvider di Spring Security, già incluso in fase di inizializzazione del progetto backend.
+Attraverso il costruttore di questa classe, sono stati specificati i parametri di cui sopra come root degli utenti e sono state incluse le informazioni
+relative all'indirizzo pubblico del sistema Active Directory della rete da contattare per verificare le credenziali e la presenza degli utenti, oltre al nome di dominio.
+Terminata la configurazione di questo componente, diventato il cosiddetto AuthenticationProvider del progetto e cioè quel componente che gestisce in automatico
+l'autenticazione di un utente al momento della richiesta verso il backend, sono stati necessari ulteriori passi per risolvere alcune problematiche di diversa natura.
+Anzitutto è stata abilitata la gestione del CORS, acronimo di Cross-Origin Resource Sharing.
+Il CORS è un meccanismo di difesa realizzato per impedire a qualunque origine non conosciuta di utilizzare le funzionalità esposte dal backend.
+Un'origine, nel contesto, è una qualsiasi combinazione di tre parametri dello stack TCP/IP standard: dominio, schema e porta.
+Nel caso di ReportManager, l'unica applicazione in grado di comunicare e condividere risorse con la parte server deve essere l'applicazione Angular del frontend.
+Ci si è poi posti il problema di come mantenere lo stato autenticato per un utente nel frontend.
+Nel backend questa caratteristica è delegata a LDAP; questa parte dell'applicazione concettualmente lavora per singole richieste e in quanto RESTful non ha il concetto di stato.
+Lo stato, infatti, è mantenuto nel frontend e dunque si rende necessario un meccanismo efficace di gestione di login e logout.
+Come da best practice diffusasi con l'avvento di REST stesso, la scelta in questo caso è ricaduta sui JSON Web Tokens (JWT).
+Un JSON Web Token è un insieme di dati sotto forma di oggetto JavaScript che il frontend custodisce e invia in un particolare header HTTP con ogni chiamata al backend.
+Se l'utente è riconosciuto e ha il permesso di eseguire operazioni è perché nella chiamata ha annesso questo token.
+Al suo interno sono infatti presenti le informazioni specifiche su ciò che può o non può fare un determinato soggetto: le claim.
+Oltre a queste, è specificata una data di scadenza che serve come ulteriore misura di sicurezza per il caso in cui un utente malintenzionato riuscisse a impossessarsi del token.
+Perché il meccanismo stia in piedi e non ci siano forzature o compromissioni, è necessario che ogni JWT sia correttamente verificato e approvato dal backend.
+Nel caso del progetto ReportManager, la sicurezza è garantita dalla firma digitale apposta sul JWT stesso; questa firma è ottenuta e verificabile tramite una coppia di chiavi
+(pubblica e privata) che costituiscono un'implementazione del concetto di cifratura asimmetrica.
+Riassumendo, un dipendente che voglia effettuare il login col proprio account Active Directory (LDAP) aziendale compirà implicitamente i seguenti step:
+\begin{itemize}
+    \item Inserirà le proprie credenziali e sottometterà le stesse tramite form presentata dal progetto Angular di frontend all'avvio
+    \item Il backend le riceverà a un particolare endpoint che verificherà in primis la correttezza della sorgente CORS
+    \item Il backend verificherà poi la presenza del JWT e la sua validità sulla base delle chiavi definite
+    \item Le informazioni saranno inviate a LDAP per l'effettiva validazione dell'utente tramite i parametri configurati di cui sopra
+    \item Se non presente nel database locale di ReportManager, l'utente sarà aggiunto a esso per non richiedere i dettagli a LDAP a ogni richiesta successiva
+    \item Verrà prodotto un nuovo JWT per il richiedente e sarà restituito al frontend che lo salverà localmente per rendere finalmente operativo il soggetto
+\end{itemize}
+Nel capitolo \ref{c:project} è stato anticipato che i dipendenti di INFOLOG che utilizzeranno ReportManager si dividono in due categorie: quelli che fanno parte della piattaforma
+Atlassian Jira e quelli che non ne fanno parte.
+A seguito di un'attenta analisi del flusso descritto poc'anzi, può sembrare che manchi un dettaglio importante: come distinguere un utente Jira da uno Unitegy "semplice"?
+È infatti vero che un qualunque impiegato di INFOLOG fa parte di Unitegy mentre solo la porzione di questi che lavora in Logistics utilizza il software di Atlassian.
+In realtà il token JWT fornirà al frontend anche questa informazione; dopo l'interrogazione a LDAP per sapere se presente davvero in INFOLOG, è stata implementata infatti
+una chiamata a un'API REST esposta da Jira stesso che consente di verificare proprio l'esistenza di un certo utente sulla base dell'indirizzo email.
+È stato quindi verificato con il reparto IT che come regola ogni utente Jira di INFOLOG accedesse effettivamente con la stessa email aziendale presente su Unitegy.
+Esclusa la possibilità che i due indirizzi non coincidessero, l'integrazione è stata dunque completata.
