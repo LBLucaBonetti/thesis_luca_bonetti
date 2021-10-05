@@ -5,7 +5,9 @@ Questa tipologia di paradigma parte dal concetto di interazione client/server e 
 Nel complesso, questa separazione si concretizza tipicamente nella produzione di due progetti quasi completamente indipendenti.
 L'unico nesso tra queste due parti, chiamate frontend per la presentazione e backend per elaborazione e memorizzazione, è l'interfaccia di comunicazione.
 Il protocollo HTTP funge da unico collante per la trasmissione dei dati in entrambi i sensi.
-\\
+
+\section{Il paradigma REST}
+
 La struttura teorica prevede la costruzione di differenti punti di contatto, detti endpoint, che il frontend richiama quando necessita di uno o più dati.
 Questi punti di contatto possono restituire informazioni, come nel caso di chiamate HTTP di tipo GET, possono memorizzarne, come nel caso di chiamate HTTP di tipo POST, possono modificare
 la situazione esistente, come nel caso di chiamate HTTP di tipo PUT o PATCH e possono eliminare entità persistenti, attraverso chiamate HTTP di tipo DELETE.
@@ -28,7 +30,9 @@ Fintanto che l'interfaccia tra le due parti non viene modificata, infatti, i due
 \\
 Il nome scelto per l'applicazione è ReportManager.
 L'architettura API RESTful è stata implementata attraverso due distinti componenti: backend e frontend.
-\\
+
+\section{Il backend}
+
 Il backend è costituito da una web application, ovvero un software fruibile attraverso il web e in particolare tramite protocollo HTTP.
 Java è il linguaggio di programmazione di riferimento per questa parte del software e per tale ragione è stato impiegato il servlet container Tomcat per poter debuggare e poi
 mettere in produzione quanto realizzato.
@@ -36,7 +40,9 @@ Il servlet container è un particolare strato che si frappone tra l'utenza del s
 la traduzione e il mapping delle chiamate HTTP, reindirizzandole agli endpoint definiti.
 In questo modo, prendendo l'esempio di una chiamata di tipo GET, verranno richiesti dati al giusto URL definito per questa interrogazione.
 Come anticipato, il framework di riferimento per questa porzione del progetto è Spring Boot.
-\\
+
+\section{Il frontend}
+
 Il frontend è costituito da una Single Page Application sviluppata, invece, con il framework Angular.
 Una Single Page Application, comunemente abbreviata con l'acronimo SPA, è fondamentalmente una pagina web caricata totalmente al primo accesso.
 Nel momento in cui un utente utilizza una SPA, nell'accedere all'URL corrispondente a essa otterrà immediatamente l'intero applicativo sul proprio browser.
