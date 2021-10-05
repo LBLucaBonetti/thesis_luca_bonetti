@@ -2,18 +2,19 @@
 
 \section{Angular}
 
-Il frontend del software è stato realizzato con Angular.
+Il frontend del software è stato realizzato con Angular\footnote{https://angular.io/}.
 Angular è un framework di sviluppo per interfacce e applicazioni web sviluppato e mantenuto da Google.
 Viene distribuito tramite licenza simile a quella MIT e ciò rende possibile visionare, modificare e redistribuire il codice o parte di esso senza alcun limite.
 La prima versione della piattaforma risale al 2010 e prende il nome di AngularJS; l'avvento di questo strumento ha consentito a moltissimi programmatori di avvicinarsi
-allo sviluppo di interfacce grafiche e pagine web sempre più dinamiche grazie all'uso massivo di JavaScript per l'interattività.
+allo sviluppo di interfacce grafiche e pagine web sempre più dinamiche grazie all'uso massivo di JavaScript, linguaggio di programmazione implementazione dello standard
+ECMAScript\footnote{https://www.ecma-international.org/publications-and-standards/standards/ecma-262/}, per l'interattività.
 Nel 2016, il software viene completamente riscritto per adattarsi alle esigenze di modernità del panorama di sviluppo emergente.
 Il nome viene cambiato in Angular e nasce il progetto di cui ReportManager fa uso.
-Il linguaggio di programmazione attualmente impiegato all'interno di questo strumento è TypeScript, un superset di JavaScript.
+Attualmente, questo strumento è scritto in TypeScript\footnote{https://www.typescriptlang.org/}, un superset di JavaScript.
 Un superset, nel gergo informatico, indica una tecnologia che ne estende una già esistente, arricchendone le caratteristiche e migliorandola.
 Nel caso di TypeScript, la differenza sostanziale rispetto a JavaScript è legata alla tipizzazione.
-Se uno dei maggiori punti a sfavore di linguaggi di natura dinamica come JavaScript e Python è l'uso di meccanismi complessi per la comprensione dei tipi delle 
-variabili, soprattutto per progetti di medie e grandi dimensioni, TypeScript offre una soluzione a questo presunto difetto fornendo agli sviluppatori la sintassi
+Se uno dei maggiori punti a sfavore di linguaggi di natura dinamica come JavaScript e Python\footnote{https://www.python.org/} è l'uso di meccanismi complessi per la comprensione
+dei tipi delle variabili, soprattutto per progetti di medie e grandi dimensioni, TypeScript offre una soluzione a questo presunto difetto fornendo agli sviluppatori la sintassi
 per introdurre la tipizzazione forte.
 In realtà i vantaggi sono visibili tipicamente durante la fase di sviluppo, perché TypeScript viene poi tradotto in JavaScript nella fase di compilazione e interpretazione del codice.
 L'attività dello sviluppatore risulta migliore soprattutto grazie alla possibilità di definire per ogni oggetto di tipo JSON la natura di ogni parametro espresso; questo 
@@ -21,41 +22,43 @@ dà l'enorme vantaggio di non doversi più affidare unicamente al nome di una va
 \\
 Angular offre numerose altre caratteristiche, oltre al TypeScript.
 Nasce come framework multipiattaforma, rendendo possibile lo sviluppo di applicativi che possano essere eseguiti correttamente su browser diversi, su sistemi desktop e su 
-smartphone dotati di sistemi operativi Android o iOS grazie a interfacce terze come il progetto Apache Cordova.
-Il sistema è stato riprogettato al momento della transizione da AngularJS con velocità e performance come punti cardine, rendendo qualunque applicazione realizzata con esso estremamente
+smartphone dotati di sistemi operativi Android o iOS grazie a interfacce terze come il progetto Apache Cordova\footnote{https://cordova.apache.org/}.
+Il sistema è stato riprogettato al momento della transizione da AngularJS\footnote{https://angularjs.org/} con velocità e performance come punti cardine, rendendo qualunque applicazione realizzata con esso estremamente
 rapida e professionale già con le semplici impostazioni di default.
 Moltissimi ambienti di sviluppo integrati (o IDE) offrono un'ottima compatibilità con esso e con i tool specifici che aiutano nel programmare e nello sfruttare al meglio le sue 
 caratteristiche.
 Trattandosi di un framework sviluppato fin da 2016, infine, è estremamente diffuso in tutto il mondo e ha alle spalle numerosi team che lo supportano,
 che ne segnalano problematiche nella repository pubblica ufficiale e che lo utilizzano per progetti in ambiti che spaziano dal privato all'enterprise.
-La community è una delle più attive tra i numerosi progetti dello stesso tipo presenti al giorno d'oggi e si contende con React e Vue lo scettro di miglior ambiente per lo 
-sviluppo di interfacce web.
+La community è una delle più attive tra i numerosi progetti dello stesso tipo presenti al giorno d'oggi e si contende con React\footnote{https://it.reactjs.org/} e
+Vue\footnote{https://vuejs.org/} lo scettro di miglior ambiente per lo sviluppo di interfacce web.
 Offre, infine, di default il pattern Model-View-Controller (o MVC), nel quale un applicativo si suddivide in tre parti principali che comunicano ma si suddividono i ruoli;
 la parte di Model identifica le entità che saranno gestite e offre funzioni per la loro gestione, la parte View rappresenta la vista dei dati e la loro presentazione all'utente mentre
 la parte Controller implementa le logiche di business, cioè il vero e proprio motore del software.
 \\
 All'interno di ReportManager, Angular è fiancheggiato da altre librerie che meritano menzione.
-Una di queste è sicuramente RxJS. Essa viene impiegata per la gestione delle chiamate asincrone e dei flussi di dati basati su eventi.
+Una di queste è sicuramente RxJS\footnote{https://rxjs.dev/guide/overview}. Essa viene impiegata per la gestione delle chiamate asincrone e dei flussi di dati basati su eventi.
 In estrema sintesi, RxJS implementa il design pattern observer nel quale un oggetto osservato funge da fulcro e tutti gli ascoltatori interessati a tale oggetto e ai dati ad esso
 correlati scelgono di abbonarsi per ricevere aggiornamenti puntuali rispetto a qualsivoglia modifica.
-Un'altra libreria è Angular Material, sfruttata per il duplice obiettivo di evitare la creazione di ogni singolo componente da zero e di dare un'idea di coesione stilistica
-all'intera interfaccia utente pur non avendo alcuna competenza grafica pregressa.
-Per quanto riguarda la gestione ottimizzata delle date e degli orari tra le viste applicative e il backend, è stata impiegata la libreria Moment.js, punto di riferimento per i 
-programmatori JavaScript per tale compito.
-Signature Pad è stata usata per gestire la firma di un dipendente o di un cliente in modo semplice e chiaro.
-Infine, il package uuid è stato usato per generare id univoci quando necessario; gli identificativi ottenuti in questo modo hanno una bassissima chance di collisione e dunque si
-prestano bene a distinguere oggetti o entità che devono essere univocamente determinate e determinabili.
+Un'altra libreria è Angular Material\footnote{https://material.angular.io/}, sfruttata per il duplice obiettivo di evitare la creazione di ogni singolo componente da zero e di
+dare un'idea di coesione stilistica all'intera interfaccia utente pur non avendo alcuna competenza grafica pregressa.
+Per quanto riguarda la gestione ottimizzata delle date e degli orari tra le viste applicative e il backend, è stata impiegata la libreria Moment.js\footnote{https://momentjs.com/}, 
+punto di riferimento per i programmatori JavaScript per tale compito.
+Signature Pad\footnote{https://github.com/szimek/signature\_pad} è stata usata per gestire la firma di un dipendente o di un cliente in modo semplice e chiaro.
+Infine, il package uuid\footnote{https://www.npmjs.com/package/uuid} è stato usato per generare id univoci quando necessario; gli identificativi ottenuti in questo modo hanno 
+una bassissima chance di collisione e dunque si prestano bene a distinguere oggetti o entità che devono essere univocamente determinate e determinabili.
 
 \section{Spring Boot}
 
-Il backend di ReportManager è stato realizzato con Spring Boot.
-Spring, da cui quest'ultimo deriva, è un framework di sviluppo per applicazioni che saranno eseguite sulla JVM, acronimo di Java Virtual Machine.
+Il backend di ReportManager è stato realizzato con Spring Boot\footnote{https://spring.io/projects/spring-boot}.
+Spring\footnote{https://spring.io/}, da cui quest'ultimo deriva, è un framework di sviluppo per applicazioni che saranno eseguite sulla JVM, 
+acronimo di Java Virtual Machine\footnote{https://www.java.com/it/download/manual.jsp}.
 La Java Virtual Machine è uno strumento che consente di eseguire codice scritto con l'omonimo linguaggio di programmazione su differenti dispositivi; questo perché costituisce un ponte
 tra le chiamate di sistema e le API descritte e utilizzate dalle librerie Java stesse.
 Basta dunque che un sistema sia compatibile con la JVM perché un programma Java possa essere eseguito su esso.
-Questa caratteristica ha reso Java e il relativo ecosistema estremamente diffusi e prolifici, tanto che anche progetti enormi, come Android di Google, ne fanno uso.
+Questa caratteristica ha reso Java e il relativo ecosistema estremamente diffusi e prolifici, tanto che anche progetti enormi, come Android\footnote{https://www.android.com/intl/it\_it/} 
+di Google, ne fanno uso.
 In quest'ottica, Spring si presta molto bene per la creazione di servizi web basati su Servlet.
-I Servlet sono oggetti Java che operano in un server web, come ad esempio Apache Tomcat, che li espone via internet.
+I Servlet sono oggetti Java che operano in un server web, come ad esempio Apache Tomcat\footnote{http://tomcat.apache.org/}, che li espone via internet.
 Spring nasce nel 2003 in risposta alle complessità delle specifiche emergenti di J2EE (oggi Jakarta EE), cioè un insieme di specifiche volte a estendere le capacità di Java verso un mondo sempre più
 orientato a internet e ai servizi di livello enterprise a esso connessi.
 Assume ben presto una posizione che si affianca a queste specifiche, finendo con l'adozione di alcune di esse come, ad esempio, le già citate Servlet API e JPA, specifica di persistenza
