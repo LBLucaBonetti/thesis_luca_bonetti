@@ -1,7 +1,8 @@
 \chapter{L'architettura}\label{c:architecture}
 
 Come anticipato nel capitolo \ref{c:project}, l'architettura del sistema progettato segue il modello API RESTful.
-Questa tipologia di paradigma parte dal concetto di interazione client/server e comprende una netta suddivisione tra gli aspetti legati alla logica di presentazione dei dati e quelli legati alla loro elaborazione e memorizzazione.
+Questa tipologia di paradigma parte dal concetto di interazione client/server e comprende una netta suddivisione tra gli aspetti legati alla logica di presentazione dei dati
+e quelli legati alla loro elaborazione e memorizzazione.
 Nel complesso, questa separazione si concretizza tipicamente nella produzione di due progetti quasi completamente indipendenti.
 L'unico nesso tra queste due parti, chiamate frontend per la presentazione e backend per elaborazione e memorizzazione, è l'interfaccia di comunicazione.
 Il protocollo HTTP funge da unico collante per la trasmissione dei dati in entrambi i sensi.
@@ -9,8 +10,8 @@ Il protocollo HTTP funge da unico collante per la trasmissione dei dati in entra
 \section{Il paradigma REST}
 
 La struttura teorica prevede la costruzione di differenti punti di contatto, detti endpoint, che il frontend richiama quando necessita di uno o più dati.
-Questi punti di contatto possono restituire informazioni, come nel caso di chiamate HTTP di tipo GET, possono memorizzarne, come nel caso di chiamate HTTP di tipo POST, possono modificare
-la situazione esistente, come nel caso di chiamate HTTP di tipo PUT o PATCH e possono eliminare entità persistenti, attraverso chiamate HTTP di tipo DELETE.
+Questi punti di contatto possono restituire informazioni, come nel caso di chiamate HTTP di tipo GET, possono memorizzarne, come nel caso di chiamate HTTP di tipo POST, 
+possono modificare la situazione esistente, come nel caso di chiamate HTTP di tipo PUT o PATCH e possono eliminare entità persistenti, attraverso chiamate HTTP di tipo DELETE.
 Va precisato che il mapping tra funzionalità e verbi HTTP non rende di per sé una API RESTful.
 \\
 In un'architettura di tipo client/server generica, un server espone servizi verso uno o più client che lo interrogano per usufruirne.
@@ -18,15 +19,18 @@ Il server è responsabile della manutenzione della sessione di ogni client che c
 La sessione rappresenta sostanzialmente l'insieme dei dati che servono a identificare l'utente e a distinguere le richieste consentite in base a quelle precedenti.
 REST, acronimo di REpresentational State Transfer, non sfugge a questa definizione ma ne deriva e ne modifica i vincoli.
 Il paradigma è stato introdotto nella tesi di dottorato di Roy Fielding \cite{fielding2000architectural}, celebre informatico statunitense contemporaneo.
-Rispetto al tradizionale concetto di stato persistente mantenuto all'interno della parte server dell'applicativo, questo nuovo approccio definisce la comunicazione verso esso come stateless, ovvero senza stato.
+Rispetto al tradizionale concetto di stato persistente mantenuto all'interno della parte server dell'applicativo, questo nuovo approccio definisce la comunicazione verso esso come 
+stateless, ovvero senza stato.
 In quest'ottica, un client che intenda usufruire di un particolare servizio del server dovrà fornire ad esso tutti i dati necessari perché la propria richiesta sia soddisfatta.
 Il server, d'altro canto, non avrà alcuna memoria rispetto alle differenti richieste giunte dal client, da cui la definizione di stateless (senza stato).
 Il principale vantaggio di non avere una sessione mantenuta nel backend è un enorme alleggerimento nella gestione di client differenti e/o non omogenei.
 Il ruolo del client, tuttavia, subisce un netto cambiamento: la sessione deve ora essere immagazzinata, infatti, in questa porzione dell'applicativo.
 A partire dalla dissertazione con cui Fielding introduce nel 2000 questo nuovo stile architetturale, REST è diventato uno standard de-facto per i più moderni servizi internet.
-Il progressivo arricchimento delle risorse disponibili ai client ha reso la manutenzione di una sessione progressivamente meno esosa in termini di costi di elaborazione e ha sicuramente favorito la diffusione del pattern.
+Il progressivo arricchimento delle risorse disponibili ai client ha reso la manutenzione di una sessione progressivamente meno esosa in termini di costi di elaborazione e ha 
+sicuramente favorito la diffusione del pattern.
 Un ulteriore aspetto che ha permesso a diverse aziende di adottare REST come metodologia di sviluppo standard per sistemi distribuiti e non è l'indipendenza tra frontend e backend.
-Fintanto che l'interfaccia tra le due parti non viene modificata, infatti, i due progetti possono evolvere indipendentemente l'uno rispetto all'altro e possono essere realizzati da team differenti o perfino da società diverse.
+Fintanto che l'interfaccia tra le due parti non viene modificata, infatti, i due progetti possono evolvere indipendentemente l'uno rispetto all'altro e possono essere realizzati 
+da team differenti o perfino da società diverse.
 \\
 Il nome scelto per l'applicazione è ReportManager.
 L'architettura API RESTful è stata implementata attraverso due distinti componenti: backend e frontend.
@@ -50,7 +54,8 @@ Il sistema si differenzia rispetto a una normale pagina internet poiché non c'�
 all'interattività fornita da linguaggi di scripting come JavaScript, i contenuti sono completamente dinamici e vengono aggiornati quasi in tempo reale.
 L'esperienza di fruizione risulta notevolmente appesantita solamente in una fase di caricamento iniziale, diventando pressochè istantanea nel prosieguo.
 L'impiego di tecniche asincrone come AJAX, inoltre, consente di raggiungere risultati che fino a qualche tempo addietro si pensavano impossibili.
-AJAX, acronimo di Asincronous JavaScript and XML, è una tecnica che consente di disaccoppiare l'invio e la ricezione di dati verso e da server dalla logica di presentazione delle pagine web.
+AJAX, acronimo di Asincronous JavaScript and XML, è una tecnica che consente di disaccoppiare l'invio e la ricezione di dati verso e da server dalla logica di presentazione delle 
+pagine web.
 AJAX non è una libreria e non è un linguaggio di programmazione; consente, tuttavia, di effettuare chiamate asincrone anziché sincrone.
 La sostanziale differenza sta nel fatto che una chiamata sincrona deve attendere un esito prima di proseguire con l'elaborazione mentre una asincrona no.
 La logica sincrona impedisce di procedere con il flusso dei dati e, eventualmente, di mostrare a video i risultati delle operazioni richieste dall'utente.

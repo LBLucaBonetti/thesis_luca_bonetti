@@ -23,8 +23,8 @@ dà l'enorme vantaggio di non doversi più affidare unicamente al nome di una va
 Angular offre numerose altre caratteristiche, oltre al TypeScript.
 Nasce come framework multipiattaforma, rendendo possibile lo sviluppo di applicativi che possano essere eseguiti correttamente su browser diversi, su sistemi desktop e su 
 smartphone dotati di sistemi operativi Android o iOS grazie a interfacce terze come il progetto Apache Cordova\footnote{https://cordova.apache.org/}.
-Il sistema è stato riprogettato al momento della transizione da AngularJS\footnote{https://angularjs.org/} con velocità e performance come punti cardine, rendendo qualunque applicazione realizzata con esso estremamente
-rapida e professionale già con le semplici impostazioni di default.
+Il sistema è stato riprogettato al momento della transizione da AngularJS\footnote{https://angularjs.org/} con velocità e performance come punti cardine, rendendo qualunque 
+applicazione realizzata con esso estremamente rapida e professionale già con le semplici impostazioni di default.
 Moltissimi ambienti di sviluppo integrati (o IDE) offrono un'ottima compatibilità con esso e con i tool specifici che aiutano nel programmare e nello sfruttare al meglio le sue 
 caratteristiche.
 Trattandosi di un framework sviluppato fin da 2016, infine, è estremamente diffuso in tutto il mondo e ha alle spalle numerosi team che lo supportano,
@@ -32,8 +32,8 @@ che ne segnalano problematiche nella repository pubblica ufficiale e che lo util
 La community è una delle più attive tra i numerosi progetti dello stesso tipo presenti al giorno d'oggi e si contende con React\footnote{https://it.reactjs.org/} e
 Vue\footnote{https://vuejs.org/} lo scettro di miglior ambiente per lo sviluppo di interfacce web.
 Offre, infine, di default il pattern Model-View-Controller (o MVC), nel quale un applicativo si suddivide in tre parti principali che comunicano ma si suddividono i ruoli;
-la parte di Model identifica le entità che saranno gestite e offre funzioni per la loro gestione, la parte View rappresenta la vista dei dati e la loro presentazione all'utente mentre
-la parte Controller implementa le logiche di business, cioè il vero e proprio motore del software.
+la parte di Model identifica le entità che saranno gestite e offre funzioni per la loro gestione, la parte View rappresenta la vista dei dati e la loro presentazione 
+all'utente mentre la parte Controller implementa le logiche di business, cioè il vero e proprio motore del software.
 \\
 All'interno di ReportManager, Angular è fiancheggiato da altre librerie che meritano menzione.
 Una di queste è sicuramente RxJS\footnote{https://rxjs.dev/guide/overview}. Essa viene impiegata per la gestione delle chiamate asincrone e dei flussi di dati basati su eventi.
@@ -52,20 +52,20 @@ una bassissima chance di collisione e dunque si prestano bene a distinguere ogge
 Il backend di ReportManager è stato realizzato con Spring Boot\footnote{https://spring.io/projects/spring-boot}.
 Spring\footnote{https://spring.io/}, da cui quest'ultimo deriva, è un framework di sviluppo per applicazioni che saranno eseguite sulla JVM, 
 acronimo di Java Virtual Machine\footnote{https://www.java.com/it/download/manual.jsp}.
-La Java Virtual Machine è uno strumento che consente di eseguire codice scritto con l'omonimo linguaggio di programmazione su differenti dispositivi; questo perché costituisce un ponte
-tra le chiamate di sistema e le API descritte e utilizzate dalle librerie Java stesse.
+La Java Virtual Machine è uno strumento che consente di eseguire codice scritto con l'omonimo linguaggio di programmazione su differenti dispositivi; questo perché costituisce 
+un ponte tra le chiamate di sistema e le API descritte e utilizzate dalle librerie Java stesse.
 Basta dunque che un sistema sia compatibile con la JVM perché un programma Java possa essere eseguito su esso.
 Questa caratteristica ha reso Java e il relativo ecosistema estremamente diffusi e prolifici, tanto che anche progetti enormi, come Android\footnote{https://www.android.com/intl/it\_it/} 
 di Google, ne fanno uso.
 In quest'ottica, Spring si presta molto bene per la creazione di servizi web basati su Servlet.
 I Servlet sono oggetti Java che operano in un server web, come ad esempio Apache Tomcat\footnote{http://tomcat.apache.org/}, che li espone via internet.
-Spring nasce nel 2003 in risposta alle complessità delle specifiche emergenti di J2EE (oggi Jakarta EE), cioè un insieme di specifiche volte a estendere le capacità di Java verso un mondo sempre più
-orientato a internet e ai servizi di livello enterprise a esso connessi.
-Assume ben presto una posizione che si affianca a queste specifiche, finendo con l'adozione di alcune di esse come, ad esempio, le già citate Servlet API e JPA, specifica di persistenza
-dei dati che determina come un programma deve interagire con un database.
+Spring nasce nel 2003 in risposta alle complessità delle specifiche emergenti di J2EE (oggi Jakarta EE), cioè un insieme di specifiche volte a estendere le capacità di Java 
+verso un mondo sempre più orientato a internet e ai servizi di livello enterprise a esso connessi.
+Assume ben presto una posizione che si affianca a queste specifiche, finendo con l'adozione di alcune di esse come, ad esempio, le già citate Servlet API e JPA, specifica di 
+persistenza dei dati che determina come un programma deve interagire con un database.
 Spring è fin dagli albori completamente modulare e, proprio grazie a questa caratteristica, nel corso degli anni sono nati diversi progetti che lo integrano e lo estendono;
-ogni singolo modulo mira a un preciso caso d'uso: Spring Security offre funzionalità di sicurezza, Spring Data implementa le specifiche JPA, Spring HATEOAS fornisce metodi per rendere
-una API completamente RESTful aggiungendo la navigazione ipertestuale tra le diverse entità gestite, ...
+ogni singolo modulo mira a un preciso caso d'uso: Spring Security offre funzionalità di sicurezza, Spring Data implementa le specifiche JPA, Spring HATEOAS fornisce metodi per 
+rendere una API completamente RESTful aggiungendo la navigazione ipertestuale tra le diverse entità gestite, ...
 \\
 Un importante progetto legato a questo ecosistema è Spring Boot.
 La prima versione di questo ramo di sviluppo del framework Spring risale al 2014 e prende subito piede perché offre una visione opinionata di Spring stesso, consentendo a molti
@@ -74,5 +74,5 @@ Spring è infatti uno strumento che si dimostra da un lato molto efficiente e ro
 Il progetto del backend di ReportManager è stato realizzato con questa versione proprio per diminuire le difficoltà iniziali che si incontrano inevitabilmente
 quando si approccia questa tecnologia.
 \\
-Nel prossimo capitolo si presentano le funzionalità implementate in ReportManager e si mettono in evidenza le caratteristiche di Angular e Spring Boot che hanno consentito di raggiungere
-almeno parzialmente i risultati voluti in fase di stesura dei requisiti.
+Nel prossimo capitolo si presentano le funzionalità implementate in ReportManager e si mettono in evidenza le caratteristiche di Angular e Spring Boot che hanno consentito 
+di raggiungere almeno parzialmente i risultati voluti in fase di stesura dei requisiti.
