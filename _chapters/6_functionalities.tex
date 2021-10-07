@@ -111,3 +111,44 @@ Premendo uno dei bottoni della dashboard, si accede alle sottosezioni specifiche
 
 \section{La gestione dei task e delle ore su Atlassian Jira}
 
+Jira è il programma di Atlassian per la gestione dello sviluppo con Agile.
+Il manifesto Agile\footnote{https://agilemanifesto.org/iso/it/manifesto.html} è un elenco di principi atti a favorire la produzione di software di qualità in un tempo stabilito e
+soprattutto a ritmi continui, senza rilasci casuali o al termine di un intero percorso di lavoro.
+I fondamenti principali che lo caratterizzano sono:
+\begin{itemize}
+    \item Individui e interazioni sono più importanti di processi e strumenti
+    \item Il software funzionante è più importante di una documentazione esaustiva
+    \item La collaborazione col cliente è più importante della negoziazione del contratto
+    \item La risposta al cambiamento è più importante del seguire un piano prestabilito alla lettera
+\end{itemize}
+Le più grandi aziende e quelle che ottengono i migliori risultati, ad oggi, adoperano Agile su piccola, media o larga scala per la gestione dei team di programmatori e del rapporto
+con le altre figure dell'organizzazione.
+INFOLOG, scegliendo questo modus operandi, ha adottato il software Jira perché di ottima fattura e perché è risultato perfetto alle caratteristiche operative del reparto Logistics.
+Il pacchetto fornito dal produttore è fruibile attraverso due modalità:
+\begin{itemize}
+    \item In cloud, senza dunque installare alcunché e sfruttando l'infrastruttura fornita senza doverla gestire
+    \item Installandolo sui server aziendali, per poter avere il pieno controllo sul database, sugli aggiornamenti e sulle estensioni
+\end{itemize}
+Data l'esperienza dei suoi tecnici, INFOLOG ha scelto la seconda opzione.
+\\
+Jira suddivide il lavoro in progetti differenti. La definizione di ciò che viene rappresentato da un progetto può variare a seconda dell'uso che si fa del programma, anche se
+l'accezione comune è che si tratti di un singolo progetto software o di un modulo di esso.
+INFOLOG ha scelto di creare un progetto generico per INTELLIMAG, nel quale vengono sviluppate le funzionalità comuni del gestionale di magazzino.
+Per ognuna delle versioni modificate per il cliente, poi, sono stati creati altri progetti sui quali tutti i membri del team Logistics hanno accesso e possono creare task operativi.
+Per ogni progetto si procede allo sviluppo per sprint della durata tipica di un paio di settimane.
+Uno sprint è gestibile attraverso una particolare schermata che mostra colonne diverse per i task da fare, per quelli in corso e per quelli completati.
+Anche in questo caso, in realtà, l'intestazione e il numero di colonne si possono adeguare alle proprie esigenze.
+All'interno di ogni progetto nascono compiti di grandi dimensioni, che raggruppano diverse operazioni più piccole; questi prendono il nome di epiche.
+Un'epica deve essere creata da un project manager, figura che assolve funzioni di coordinamento del team.
+Arrivando all'anello più basso della catena dello sviluppo, esistono i task che rappresentano le singole unità operative di programmazione.
+Questi possono essere creati, modificati e cancellati da un qualunque sviluppatore di Logistics e sono collegati a una particolare epica e a un programmatore che esegue.
+\\
+Jira, inoltre, è altamente estensibile. Offre infatti un vero e proprio ecosistema di plugin di terze parti che integrano le più disparate funzioni: dalla messaggistica
+fino al deploy automatizzato sulla base della chiusura di un'epica. È addirittura presente online uno store virtuale\footnote{https://marketplace.atlassian.com/} nel quale cercare
+l'estensione che soddisfa maggiormente le proprie esigenze.
+INFOLOG ha bisogno di tenere monitorati i tempi che ogni sua figura del team Logistics passa nello sviluppo di un determinato task.
+Questo consente ai superiori di tenere un rendiconto dei costi e dei prodotti per fini gestionali e commerciali.
+Per fare questo, è stato annesso a Jira il plugin WorklogPRO - Timesheets for Jira\footnote{https://marketplace.atlassian.com/apps/1212626/worklogpro-timesheets-for-jira?tab=overview\&hosting=datacenter}.
+WorklogPRO offre una comoda interfaccia per inserire un riassunto delle operazioni svolte e del tempo impiegato su un task specifico.
+Sia Jira Software che WorklogPRO offrono un'API RESTful per la comunicazione esterna. Grazie alla documentazione ben scritta e completa di entrambi, il loro impiego risulta
+particolarmente agevole.
