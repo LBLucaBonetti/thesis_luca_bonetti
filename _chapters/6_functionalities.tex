@@ -111,7 +111,7 @@ Premendo uno dei bottoni della dashboard, si accede alle sottosezioni specifiche
 
 \section{La gestione dei task e delle ore su Atlassian Jira}
 
-Jira è il programma di Atlassian per la gestione dello sviluppo con Agile.
+Jira è il programma di Atlassian per la gestione dello sviluppo con metodologia Agile.
 Il manifesto Agile\footnote{https://agilemanifesto.org/iso/it/manifesto.html} è un elenco di principi atti a favorire la produzione di software di qualità in un tempo stabilito e
 soprattutto a ritmi continui, senza rilasci casuali o al termine di un intero percorso di lavoro.
 I fondamenti principali che lo caratterizzano sono:
@@ -123,32 +123,141 @@ I fondamenti principali che lo caratterizzano sono:
 \end{itemize}
 Le più grandi aziende e quelle che ottengono i migliori risultati, ad oggi, adoperano Agile su piccola, media o larga scala per la gestione dei team di programmatori e del rapporto
 con le altre figure dell'organizzazione.
-INFOLOG, scegliendo questo modus operandi, ha adottato il software Jira perché di ottima fattura e perché è risultato perfetto alle caratteristiche operative del reparto Logistics.
+INFOLOG, scegliendo questo modus operandi, ha adottato il software in questione perché di ottima fattura e perché è risultato perfetto per le caratteristiche operative del reparto
+Logistics.
 Il pacchetto fornito dal produttore è fruibile attraverso due modalità:
 \begin{itemize}
-    \item In cloud, senza dunque installare alcunché e sfruttando l'infrastruttura fornita senza doverla gestire
-    \item Installandolo sui server aziendali, per poter avere il pieno controllo sul database, sugli aggiornamenti e sulle estensioni
+    \item In cloud, senza dunque installare alcunché e sfruttando l'infrastruttura fornita senza doverla gestire direttamente
+    \item In locale, installandolo sui server aziendali per poter avere il pieno controllo sul database, sugli aggiornamenti e sulle estensioni
 \end{itemize}
-Data l'esperienza dei suoi tecnici, INFOLOG ha scelto la seconda opzione.
+Data l'esperienza dei suoi tecnici, INFOLOG ha optato per la seconda opzione.
 \\
 Jira suddivide il lavoro in progetti differenti. La definizione di ciò che viene rappresentato da un progetto può variare a seconda dell'uso che si fa del programma, anche se
 l'accezione comune è che si tratti di un singolo progetto software o di un modulo di esso.
 INFOLOG ha scelto di creare un progetto generico per INTELLIMAG, nel quale vengono sviluppate le funzionalità comuni del gestionale di magazzino.
-Per ognuna delle versioni modificate per il cliente, poi, sono stati creati altri progetti sui quali tutti i membri del team Logistics hanno accesso e possono creare task operativi.
-Per ogni progetto si procede allo sviluppo per sprint della durata tipica di un paio di settimane.
-Uno sprint è gestibile attraverso una particolare schermata che mostra colonne diverse per i task da fare, per quelli in corso e per quelli completati.
+Per ognuna delle versioni modificate per i clienti, poi, sono stati creati altri progetti ai quali tutti i membri del team Logistics hanno accesso e su cui possono creare task
+operativi.
+Per ogni progetto si procede allo sviluppo per sprint, ovvero periodi della durata tipica di un paio di settimane.
+Uno sprint è gestibile attraverso una sezione apposita che mostra colonne diverse per i task da fare, per quelli in corso e per quelli completati.
 Anche in questo caso, in realtà, l'intestazione e il numero di colonne si possono adeguare alle proprie esigenze.
 All'interno di ogni progetto nascono compiti di grandi dimensioni, che raggruppano diverse operazioni più piccole; questi prendono il nome di epiche.
-Un'epica deve essere creata da un project manager, figura che assolve funzioni di coordinamento del team.
-Arrivando all'anello più basso della catena dello sviluppo, esistono i task che rappresentano le singole unità operative di programmazione.
-Questi possono essere creati, modificati e cancellati da un qualunque sviluppatore di Logistics e sono collegati a una particolare epica e a un programmatore che esegue.
+Un'epica deve essere necessariamente creata da un project manager, figura che assolve funzioni di coordinamento del team.
+Arrivando all'anello più basso della catena dello sviluppo, i task rappresentano le singole attività operative di programmazione.
+Questi possono essere creati, modificati e cancellati da un qualunque sviluppatore di Logistics; ognuno è collegato a un'epica di riferimento e a un programmatore che lo esegue
+materialmente.
 \\
 Jira, inoltre, è altamente estensibile. Offre infatti un vero e proprio ecosistema di plugin di terze parti che integrano le più disparate funzioni: dalla messaggistica
 fino al deploy automatizzato sulla base della chiusura di un'epica. È addirittura presente online uno store virtuale\footnote{https://marketplace.atlassian.com/} nel quale cercare
 l'estensione che soddisfa maggiormente le proprie esigenze.
 INFOLOG ha bisogno di tenere monitorati i tempi che ogni sua figura del team Logistics passa nello sviluppo di un determinato task.
-Questo consente ai superiori di tenere un rendiconto dei costi e dei prodotti per fini gestionali e commerciali.
+Questo consente ai superiori di stabilire un rendiconto dei costi e di quanto prodotto per fini gestionali e commerciali.
 Per fare questo, è stato annesso a Jira il plugin WorklogPRO - Timesheets for Jira\footnote{https://marketplace.atlassian.com/apps/1212626/worklogpro-timesheets-for-jira?tab=overview\&hosting=datacenter}.
-WorklogPRO offre una comoda interfaccia per inserire un riassunto delle operazioni svolte e del tempo impiegato su un task specifico.
-Sia Jira Software che WorklogPRO offrono un'API RESTful per la comunicazione esterna. Grazie alla documentazione ben scritta e completa di entrambi, il loro impiego risulta
+WorklogPRO offre una comoda interfaccia per inserire un riassunto delle operazioni svolte e dell'arco temporale impiegato su un task specifico.
+Sia Jira che WorklogPRO offrono un'API RESTful per la comunicazione esterna. Grazie alla documentazione ben scritta e completa di entrambi, la loro integrazione risulta
 particolarmente agevole.
+\\
+La pagina di gestione dei task di ReportManager offre all'utente del reparto Logistics tutto il necessario per creare, aggiornare e cancellare non solo i singoli task di Jira ma
+anche le ore di WorklogPRO.
+Chiaramente l'inserimento delle ore è possibile solo se il task in questione esiste su Jira stesso, e questo controllo è stato implementato fin da subito.
+All'apertura della pagina, viene mostrato un caricamento perché viene fatta una richiesta al backend per ottenere una lista di task assegnati all'utente; una volta caricati i dati,
+cioè quando lo scambio di informazioni è stato ultimato, viene nascosto il componente e vengono mostrati i dati ricevuti.
+Di ogni task viene mostrato quanto segue:
+\begin{itemize}
+    \item Chiave univoca del progetto
+    \item Chiave univoca dell'epica cui è relativo
+    \item Descrizione
+    \item Data di inizio
+    \item Data termine
+\end{itemize}
+I campi relativi all'epica e alla data di inizio sono un altro esempio dell'enorme flessibilità offerta dal software di Atlassian quando gestito internamente; 
+infatti si tratta di informazioni che normalmente non sono presenti e sono state aggiunte dal team di IT di INFOLOG, forzando anche le connessioni al momento della creazione di un 
+nuovo elemento.
+Nel backend, per evitare problematiche di sicurezza, sono state ristrette le chiamate alle REST API esposte da Jira sulla base dell'utente identificato dal token che viene prodotto
+sulla base delle credenziali del dipendente.
+In questo modo, un malintenzionato dovrebbe essere in possesso di queste o del token stesso per poter agire in sua vece.
+\\
+All'atto del caricamento dei task, per verificare l'eventuale presenza di ore segnate, viene effettuata una chiamata all'API di WorklogPRO alla quale vengono fornite due informazioni: 
+l'identificativo del task (definito \emph{issue} nella documentazione di Jira) e quello dell'utente.
+In base alla risposta, viene poi eventualmente mostrata una tabella in fondo a ogni sezione dedicata alle unità di lavoro; questa comprende, per ogni worklog inserito, le seguenti
+informazioni:
+\begin{itemize}
+    \item Data di creazione
+    \item Data di inizio
+    \item Tempo del log
+    \item Riassunto del lavoro svolto
+\end{itemize}
+Il tempo del log è mostrato secondo un particolare formato che permette di inserire le ore seguite da una h che indica il termine inglese \emph{hour} e i minuti seguiti da m che 
+indica il termine inglese \emph{minute}.
+Ogni riga della tabella dei worklog presenta un bottone d'azione che consente di modificare quanto inserito attraverso un apposito modal.
+Un modal è una schermata che compare sopra gli elementi della pagina ricoprendola parzialmente (o addirittura totalmente) e catturando l'attenzione dell'utente.
+Può essere usato per l'inserimento di dati o per notificare importanti messaggi che l'utente non deve assolutamente ignorare.
+Ulteriori funzionalità della sezione in oggetto sono elencate di seguito:
+\begin{itemize}
+    \item Ogni task consente di aggiungere attraverso un altro bottone d'azione un worklog per volta
+    \item È possibile modificare i dettagli del singolo task attraverso un bottone d'azione specifico
+    \item È possibile cancellare un task con le relative ore inserite se l'utente che compie l'azione è abilitato a farlo
+    \item Si può cercare il dettaglio di un task inserendone nell'apposita barra di ricerca la chiave univoca; in questo modo, verrà mostrato unicamente questo al posto
+    dell'intero elenco
+\end{itemize}
+
+\section{La struttura del report}
+
+La pagina di visualizzazione dei propri report è accessibile dalla dashboard attraverso il bottone \emph{I miei report}.
+\\
+Questa funzionalità è disponibile a tutti gli utenti, indipendentemente dalla tipologia.
+All'atto del caricamento della schermata, dopo i comuni controlli per verificare il login dell'utente, viene mostrato lo spinner di caricamento ad indicare che è in corso 
+un'operazione potenzialmente lenta.
+Lo spinner è un componente grafico costituito da un elemento rotante (come possono essere un semicerchio o una clessidra) che viene solitamente usato per questi scopi.
+L'operazione lenta in questione è la richiesta al backend per ottenere i dettagli dei report generati dal richiedente.
+Ottenuta la risposta, lo spinner viene nascosto e viene mostrata la lista ottenuta o un errore in caso di problemi occorsi durante la chiamata HTTP.
+La struttura dati che fa da base nel backend per i rapporti d'intervento è costituità da due entità distinte ma connesse:
+\begin{itemize}
+    \item \emph{ReportHeaderModel} - contenente i dati di testata
+    \item \emph{ReportLineModel} - contenente i dati di dettaglio, o righe
+\end{itemize}
+La distinzione nasce dal fatto che un singolo report presenta caratteristiche comuni, come ad esempio il cliente per cui è compilato, ma può avere diverse commesse cui è riferito.
+Per tale ragione, è stato scelto di inserire informazioni come il cliente nella testata e altre, come appunto la commessa presente sul database di Unitegy, sulle righe.
+Per mantenere l'integrità dei dati, è stato inoltre scelto che l'esistenza di una riga sia sempre subordinata a quella di una testata.
+Per questo motivo, non è possibile avere un oggetto di tipo ReportLineModel senza un riferimento al relativo ReportHeaderModel e tale evenienza genera un errore in fase di salvataggio
+nel backend che viene propagato di conseguenza al frontend e dunque segnalato all'utente.
+\\
+I dati della \textbf{testata} del report a livello di modello sono i seguenti:
+\begin{itemize}
+    \item Un riferimento all'utente che lo crea
+    \item Un numero progressivo cui è anteposto un prefisso univoco per dipendente costituito da lettere e numeri
+    \item Una data principale di riferimento: ogni riga deve essere successiva a questa che è da intendersi come "inizio dei lavori"
+    \item Il totale delle ore lavorate, somma dei valori delle righe
+    \item Il totale delle ore da fatturare, somma dei valori delle righe
+    \item Il riferimento al cliente per come indicato su Unitegy
+    \item Un flag che indica se il rapporto d'intervento è già stato inviato al database di Unitegy
+    \item Un campo note
+    \item La firma del cliente, serializzata come stringa sul database
+\end{itemize}
+I dati della \textbf{riga}, invece, sono i seguenti:
+\begin{itemize}
+    \item Un riferimento alla testata che indica il report
+    \item La data di riferimento per l'intervento della riga
+    \item Un campo testo in cui scrivere in sintesi le operazioni svolte
+    \item Le ore lavorate
+    \item Le ore da fatturare
+    \item Il riferimento alla commessa presente su Unitegy, chiaramente riferita allo stesso cliente della testata cui la singola riga è riferita
+\end{itemize}
+La presenza di due totali per le ore, uno riguardante quelle operative e uno quelle da fatturare, è dovuto ad un'altra esigenza di stampo commerciale; può infatti capitare che per
+un determinato lavoro venga aperta una commessa e il cliente paghi per un pacchetto predeterminato oltre il quale INFOLOG andrebbe in perdita. Sebbene questo non rappresenti un
+problema, essere consci della situazione permette di correggere laddove possibile le eventuali criticità.
+
+\section{La creazione di un nuovo report}
+
+Per creare un nuovo rapporto d'intervento, dalla dashboard occorre fare click sul pulsante \emph{Nuovo report}.
+\\
+La schermata che si presenta all'utente è costituita da uno stepper\footnote{https://material.angular.io/components/stepper/overview}, cioè da un componente grafico che suddivide
+un'azione in diverse sezioni che devono essere completate una dopo l'altra.
+È stato scelto di configurare la pagina in modo tale che gli step fossero obbligatoriamente successivi e che solo giunti al termine fossero possibili il salvataggio e l'invio dei dati
+al backend; è stato inoltre impedito di saltare uno o più step non opzionali al di fuori dell'ordine stabilito.
+Queste decisioni hanno semplificato di molto la logica che controlla la coerenza delle informazioni.
+Chiaramente, più che mai per questa sezione del software che rappresenta il principale caso d'uso, i controlli che sono stati implementati nel frontend sono riverificati anche nel
+backend.
+La prima richiesta che viene scatenata quando si vuole generare un nuovo report è quella che permette di ottenere un codice; tale requisito è indispensabilmente univoco per la base
+di dati e presenta un prefisso configurabile che varia da dipendente a dipendente e permette di distinguerlo in modo mnemonico.
+Insieme al prefisso, vengono forniti alla Single Page Application anche il numero progressivo da utilizzare, anch'esso univoco per utente, il nome e cognome dell'utente se non già
+raccolti in precedenza, la lista dei clienti per scegliere a quale di questi intestare il rapporto d'intervento e la firma del dipendente se salvata.
