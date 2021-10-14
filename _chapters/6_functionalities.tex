@@ -80,7 +80,7 @@ Esclusa la possibilità che i due indirizzi non coincidessero, l'integrazione er
 
 \section{La dashboard}
 
-Il termine dashboard indica in linea generale una sezione di controllo tramite la quale è possibile monitorare tutte le informazioni generali relative alle funzionalità e ai dati
+Il termine dashboard indica una sezione di controllo tramite la quale è possibile monitorare tutte le informazioni generali relative alle funzionalità e ai dati
 di una piattaforma.
 Una volta effettuato il login, il frontend reindirizza l'utente a questa schermata tramite Angular router.
 Angular router è un componente integrato in Angular che consente di gestire la navigazione tra le diverse viste del software di frontend.
@@ -205,7 +205,7 @@ Ulteriori funzionalità della sezione in oggetto sono elencate di seguito:
 La pagina di visualizzazione dei propri report è accessibile dalla dashboard attraverso il bottone \emph{I miei report}.
 \\
 Questa funzionalità è disponibile a tutti gli utenti, indipendentemente dalla tipologia.
-All'atto del caricamento della schermata, dopo i comuni controlli per verificare il login dell'utente, viene mostrato lo spinner di caricamento ad indicare che è in corso 
+All'atto del caricamento della schermata, dopo i comuni controlli per verificare il login dell'utente, viene mostrato lo spinner di caricamento a indicare che è in corso 
 un'operazione potenzialmente lenta.
 Lo spinner è un componente grafico costituito da un elemento rotante (come possono essere un semicerchio o una clessidra) che viene solitamente usato per questi scopi.
 L'operazione lenta in questione è la richiesta al backend per ottenere i dettagli dei report generati dal richiedente.
@@ -242,7 +242,7 @@ I dati della \textbf{riga}, invece, sono i seguenti:
     \item Le ore da fatturare
     \item Il riferimento alla commessa presente su Unitegy, chiaramente riferita allo stesso cliente della testata cui la singola riga è riferita
 \end{itemize}
-La presenza di due totali per le ore, uno riguardante quelle operative e uno quelle da fatturare, è dovuto ad un'altra esigenza di stampo commerciale; può infatti capitare che per
+La presenza di due totali per le ore, uno riguardante quelle operative e uno quelle da fatturare, è dovuto a un'altra esigenza di stampo commerciale; può infatti capitare che per
 un determinato lavoro venga aperta una commessa e il cliente paghi per un pacchetto predeterminato oltre il quale INFOLOG andrebbe in perdita. Sebbene questo non rappresenti un
 problema, essere consci della situazione permette di correggere laddove possibile le eventuali criticità.
 
@@ -261,3 +261,89 @@ La prima richiesta che viene scatenata quando si vuole generare un nuovo report 
 di dati e presenta un prefisso configurabile che varia da dipendente a dipendente e permette di distinguerlo in modo mnemonico.
 Insieme al prefisso, vengono forniti alla Single Page Application anche il numero progressivo da utilizzare, anch'esso univoco per utente, il nome e cognome dell'utente se non già
 raccolti in precedenza, la lista dei clienti per scegliere a quale di questi intestare il rapporto d'intervento e la firma del dipendente se salvata.
+I passaggi per la generazione del report sono 7 in totale:
+\begin{enumerate}
+    \item Inserimento del codice univoco di cui sopra
+    \item Inserimento di cliente e data della testata
+    \item Inserimento dei dettagli delle righe del report (con l'opzione dell'inserimento dai worklog di Jira se utente Logistics)
+    \item Inserimento di eventuali note
+    \item Inserimento o modifica delle firme del cliente e del dipendente
+    \item Salvataggio e invio dei dati al backend per la convalida
+    \item Opzioni aggiuntive: richiesta di un file PDF, richiesta di invio in allegato a email, richiesta di invio dei dati a Unitegy
+\end{enumerate}
+Particolare attenzione è stata riposta nella progettazione e nello sviluppo del punto 3 perché si fosse certi che i totali delle ore inserite fossero coerenti, che non ci fossero
+sovrapposizioni nell'inserimento di righe diverse per la stessa commessa e che le date delle righe non fossero precedenti a quella della testata di riferimento.
+
+\subsection{L'inserimento delle firme}
+
+L'inserimento delle firme che avviene al punto 5 della compilazione ha richiesto particolari accorgimenti.
+\\
+Anzitutto, è stato scelto di salvare la firma stessa come stringa nel backend e per tale ragione, trattandosi di un'immagine, è stato scelto un formato di codifica.
+Per semplificare le operazioni di scambio dati, è stato deciso di serializzare l'immagine in Data URL\footnote{https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics\_of\_HTTP/Data\_URIs}.
+\\
+Un Data URL è un particolare URL che contiene le informazioni codificate sul formato dell'immagine stessa, che nel caso di ReportManager è PNG, e sui pixel che la
+compongono; in estrema sintesi, si tratta di una stringa che contiene tutto ciò che serve a un interlocutore per ricostruire l'immagine di partenza.
+Non è sicuramente il miglior metodo con cui inviare a un server contenuti multimediali ma per oggetti di piccole dimensioni è più che sufficiente.
+Quando un utente accede a ReportManager, viene eseguito un controllo automatico per individuare quale tipo di dispositivo è in uso.
+Tramite le API fornite dai moderni browser web, scaturite dalla sempre più ampia disomogeneità dei dispositivi in circolazione, questa informazione è facilmente reperibile.
+Verificato questo dettaglio, viene settato un particolare flag che indica a tutte le schermate che ne hanno bisogno se si ha a disposizione un touchscreen.
+Il pannello in cui inserire la firma viene mostrato solo se questo flag è settato.
+\\
+L'elemento della pagina in cui si può disegnare è un canvas, nello specifico un HTMLCanvasElement che fornisce già un metodo di serializzazione comodamente utilizzabile: toDataURL.
+Allo stesso modo, all'atto del caricamento della schermata, viene caricata la firma eventualmente salvata del dipendente che esegue il lavoro presso il cliente.
+Questa conversione è in senso opposto rispetto a quella descritta poc'anzi e sfrutta il metodo fromDataURL.
+
+\subsection{Le opzioni aggiuntive}
+
+Le opzioni aggiuntive vengono abilitate solo in conseguenza del salvataggio dei dati nel backend e solo in caso di esito positivo dello stesso.
+\\
+È possibile richiedere lo scaricamento di un documento in formato PDF che riporti esattamente i dettagli del report generato.
+Per questa integrazione sono state proposte diverse soluzioni: la più completa e complessa, che prevedeva l'impiego di un file di template sorgente da compilare di volta in volta
+da codice con i parametri del rapporto d'intervento, una seconda soluzione che prevedeva la compilazione direttamente nel dispositivo richiedente e dunque lato frontend con una
+libreria JavaScript e una terza che prevedeva un compromesso tra versatilità e richiesta di risorse in quanto realizzata tramite richiesta al backend.
+In seguito a diverse valutazioni con il team Logistics, è stata scelta la terza opzione.
+\\
+Al fine di realizzare tale processo, è stato annesso al backend il componente iText PDF; questa libreria consente in modo semplice e intuitivo di creare pagine esportabili
+definendo dettagli altrimenti complessi da gestire come l'impaginazione, i margini, i bordi, le immagini e i diversi font.
+\\
+Grazie a questo strumento, è stato possibile creare un endpoint che prendesse in input un identificativo di un report e, se presente, restituisse il file creato dopo averlo salvato
+in un'apposita cartella che idealmente sarà poi creata su una repository specifica su server.
+\\
+Un'altra opzione aggiuntiva è l'invio di suddetto file via email.
+Questa caratteristica prevede un algoritmo che cerca dapprima l'eventuale file PDF da allegare, in caso manchi lo genera con l'ausilio della libreria di cui sopra e
+poi effettua l'invio a un indirizzo email specificato sul database di Unitegy direttamente sul contatto del cliente.
+In Spring Boot è stato usato il modulo JavaMailSender attraverso una specifica dipendenza che consente di inserire in maniera semplice i parametri di connessione da
+usare per l'invio nel file di properties dell'applicazione.
+Queste impostazioni sono state fornite direttamente dal reparto IT e consentono a ReportManager di sfruttare il protocollo SMTP per la posta elettronica.
+\\
+Infine è stata annessa la possibilità di inviare i dati a Unitegy stesso per sincronizzare i due database.
+Questo ha richiesto un'attenta analisi delle caratteristiche di transazionalità tra le due piattaforme al fine di non creare inconsistenze.
+\\
+La transazionalità è una caratteristica che deve essere sempre tenuta in considerazione quando si ha a che fare con un database.
+I moderni DBMS (acronimo di DataBase Management System) rispettano il cosiddetto paradigma ACID\footnote{https://it.wikipedia.org/wiki/ACID}.
+Questi indicano come deve essere gestita una transazione singola, intesa come operazione di qualsiasi tipo sui dati persistiti.
+Spring Boot offre un'enorme agevolazione, in questi termini: incorpora Hibernate.
+\\
+Hibernate è un cosiddetto persistence layer che si frappone tra l'accesso alla base di dati e la logica applicativa.
+Come l'informatica intera, è un perfetto esempio di astrazione che leva dalla mente del programmatore dettagli implementativi di basso livello consentendogli di concentrarsi sulla
+logica di business e sulla progettazione.
+Grazie a Hibernate, le transazioni possono essere gestite esplicitamente marcando un metodo di una classe Java con \emph{@Transactional};
+quando un metodo risulta avere tale annotazione, se qualcosa dovesse andare storto e un'eccezione Java fosse lanciata verrebbe fatto il cosiddetto rollback automaticamente.
+Il rollback indica il ripristino di uno stato precedentemente consistente dei dati, lasciando il database in uno stato nuovamente utilizzabile.
+Ogni scrittura su Unitegy è stata implementata secondo questa metodologia.
+
+\section{Sicurezza e HTTPS}
+
+Il progetto ReportManager nasce per esigenze interne gestionali ma dovrà essere impiegato dai dipendenti anche al di fuori della rete locale perché spesso e volentieri i rapporti
+d'intervento sono compilati con il cliente stesso presso la sede in cui i lavori sono stati eseguiti.
+\\
+A questo proposito, un futuro deploy dell'applicazione dovrà esporre i servizi del backend su internet.
+Per tale ragione, occorre proteggere gli eventuali dati sensibili con protocolli adeguatamente cifrati come HTTPS.
+\\
+INFOLOG possiede certificati proprietari che rinnova periodicamente e che garantiscono ai propri servizi la cifratura dei dati comunicati in entrambe le direzioni: front-to-back e
+back-to-front.
+\\
+Anche se durante la fase di sviluppo di un'applicazione tipicamente non si utilizza tale misura di sicurezza in quanto ambiente locale, per preparare e testare che tutto funzioni
+in modo adeguato è stato richiesto al reparto tecnico di fornire un certificato di prova.
+Ottenuto tale file, è stato configurato il progetto Spring Boot perché leggesse i dati e li scrivesse sfruttando suddetto protocollo di comunicazione.
+Sia le API di Jira che di WorklogPRO hanno endpoint esposti su internet e quindi questa accortezza riservata al progetto sarà sicuramente utile per sviluppi futuri.
