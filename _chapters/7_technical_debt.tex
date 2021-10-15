@@ -1,1 +1,61 @@
-\chapter{Il debito tecnico}\label{c:technical_debt}
+\chapter{Il debito tecnico e gli sviluppi futuri}\label{c:technical_debt}
+
+Il debito tecnico\footnote{https://martinfowler.com/bliki/TechnicalDebt.html} è un termine metaforico coniato
+da Ward Cunningham\footnote{https://it.wikipedia.org/wiki/Ward\_Cunningham}, programmatore statunitense di fama
+internazionale, per descrivere come l'attività di sviluppo di un software finalizzata unicamente al rilascio
+porti inevitabilmente con sé ripercussioni nelle fasi successive.
+\\
+Prendendo in prestito un esempio\footnote{https://martinfowler.com/bliki/TechnicalDebt.html} da Martin Fowler
+\footnote{https://it.wikipedia.org/wiki/Martin\_Fowler}, altro famoso ingegnere informatico, si può paragonare
+tale concetto a un debito finanziario; il tempo aggiuntivo che si impiegherà per aggiungere una nuova
+caratteristica al progetto è da vedersi come l'interesse sul debito e idealmente bisogna cercare di farlo tendere
+a zero.
+\\
+Sono stati condotti numerosi studi sulla questione, alcuni dei quali\cite{tom2013exploration}, propongono metodologie
+di carattere volutamente generale per comprendere il fenomeno e analizzarlo.
+\\
+Nonostante ciò, numerosissime aziende faticano a comprendere il concetto, a riconoscerlo e di conseguenza a
+fronteggiarlo.
+\\
+ReportManager è stato realizzato tenendo ben presente questa possibile problematica.
+Ogni scelta è stata condivisa con il management, ogni dipendenza annessa è stata illustrata ai membri del team
+Logistics e si è cercato di documentare il più possibile le funzionalità principali per rendere la manutenzione
+agevole a chiunque dovrà approcciarvisi.
+\\
+Nonostante l'impegno e la buona volontà, l'applicazione non è completa in ogni sua parte.
+Diverse sono le migliorie future che potranno essere programmate e messe in produzione e il seguente elenco,
+sebbene non esaustivo, riassume i punti individuati:
+\begin{itemize}
+    \item Utilizzo di un controllo unico per verificare il login utente lato frontend anziché uno replicato su ogni pagina
+    \item Miglioramento della descrizione degli errori sia nel logging del backend che nel frontend
+    \item Miglioramento della posizione dei vari popup mostrati nelle differenti pagine, con codice colori rosso, giallo e verde per distinguere la gravità del messaggio
+    \item Uso dello spinner di caricamento in conseguenza di ogni operazione potenzialmente lenta
+    \item Eliminazione del logging di debug lato frontend
+    \item Sostituzione dei parametri fissati nelle interrogazioni delle API di Atlassian Jira con i corrispondenti dinamici
+    \item Miglioramento della gestione delle firme e passaggio da stringa a immagine reale
+    \item Inserimento di un bottone per creare un nuovo report se attualmente non ne sono stati creati per quell'utente
+\end{itemize}
+Un ultimo aspetto che vale la pena di affrontare è quello relativo alle \emph{best practices}, in italiano \emph{buone pratiche}.
+Le best practices sono pattern di buona programmazione o comunque di organizzazione del software che vengono
+consigliate spesso dagli sviluppatori dei framework che si usano o dagli utenti più esperti.
+Chiaramente si tratta talvolta di finezze e altre volte invece di concetti basilari per un occhio esperto.
+Il neofita, tuttavia, trae beneficio da questi e impara la filosofia con cui i framework funzionano e come sono
+stati pensati, assumendo maggiore consapevolezza del lavoro che dovrà svolgere.
+ReportManager non fa uso esplicito di best practices e in una fase futura di refactoring dovrà assolutamente
+prevederne l'impiego.
+\\
+Il mondo Angular prevede, ad esempio, di utilizzare i services per tutte le funzionalità di business logic del
+software; questo aderisce perfettamente al concetto di Model-View-Controller me nel software in oggetto se ne fa
+un uso solo parziale.
+Nel mondo Spring Boot, invece, buone pratiche di esempio possono essere il principio di singola responsabilità e
+l'uso di Data Transfer Object (o DTO).
+Il primo indica l'idea secondo cui ogni metodo e più in generale ogni classe sia deputata a un solo compito;
+il secondo forza invece una netta separazione tra il backend e il frontend, affermando che non tutti i dettagli
+mappati su database debbano essere riportati all'interfaccia e che sia sufficiente un sottoinsieme di questi, o
+talvolta un insieme semplicemente differente di informazioni.
+\\
+Concludendo, un'applicazione moderna non può ritenersi tale senza test automatizzati. Esistono diversi strumenti
+coi quali è possibile attuare tecniche di programmazione efficaci come il Test-Driven Development (TDD)
+e la scrittura di codice avente per scopo il test di porzioni di programma.
+Sia Angular che Spring Boot offrono un supporto estremamente ampio a questa tematica anche se in una fase iniziale
+di progetto si tende spesso a tralasciare questo aspetto.
