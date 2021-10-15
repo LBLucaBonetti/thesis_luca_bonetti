@@ -71,7 +71,7 @@ Riassumendo, un dipendente che voglia effettuare il login col proprio account Ac
 \end{itemize}
 Nel capitolo \ref{c:project} è stato anticipato che i dipendenti di INFOLOG che utilizzeranno ReportManager si dividono in due categorie: quelli che fanno parte della piattaforma
 Atlassian Jira e quelli che non ne fanno parte.
-A seguito di un'attenta analisi del flusso descritto poc'anzi, può sembrare che manchi un dettaglio importante: come distinguere un utente Jira da uno Unitegy "semplice"?
+A seguito di un'attenta analisi del flusso descritto precedentemente, può sembrare che manchi un dettaglio importante: come distinguere un utente Jira da uno Unitegy "semplice"?
 È infatti vero che un qualunque impiegato di INFOLOG fa parte di Unitegy mentre solo la porzione di questi che lavora in Logistics utilizza il software di Atlassian.
 In realtà il token JWT fornirà al frontend anche questa informazione; dopo l'interrogazione a LDAP per sapere se presente, è stata implementata infatti
 una chiamata a un'API REST esposta da Jira stesso che consente di verificare appunto l'esistenza di un certo utente sulla base dell'indirizzo email.
