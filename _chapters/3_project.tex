@@ -45,3 +45,65 @@ offrirebbe comunque un backup allineato degli stessi.
 Lo stack tecnologico scelto per la produzione del software rispecchia le moderne tendenze in ambito enterprise.
 Data la pregressa esperienza di INFOLOG in merito, è stata scelta la realizzazione di una API sul modello RESTful con Spring Boot per esporre i servizi ed elaborare i dati
 e di un applicativo Single Page Application con Angular per la parte grafica.
+\\
+Questa tipologia di paradigma parte dal concetto di interazione client/server e comprende una netta suddivisione tra gli aspetti legati alla logica di presentazione dei dati
+e quelli legati alla loro elaborazione e memorizzazione.
+Nel complesso, questa separazione si concretizza tipicamente nella produzione di due progetti quasi completamente indipendenti.
+L'unico nesso tra queste due parti, chiamate frontend per la presentazione e backend per elaborazione e memorizzazione, è l'interfaccia di comunicazione.
+Il protocollo HTTP funge da unico collante per la trasmissione dei dati in entrambi i sensi.
+
+\section{Il paradigma REST}
+
+La struttura teorica prevede la costruzione di differenti punti di contatto, detti endpoint, che il frontend richiama quando necessita di uno o più dati.
+Questi punti di contatto possono restituire informazioni, come nel caso di chiamate HTTP di tipo GET, possono memorizzarne, come nel caso di chiamate HTTP di tipo POST, 
+possono modificare la situazione esistente, come nel caso di chiamate HTTP di tipo PUT o PATCH e possono eliminare entità persistenti, attraverso chiamate HTTP di tipo DELETE.
+Va precisato che il mapping tra funzionalità e verbi HTTP non rende di per sé una API RESTful.
+\\
+In un'architettura di tipo client/server generica, un server espone servizi verso uno o più client che lo interrogano per usufruirne.
+Il server è responsabile della manutenzione della sessione di ogni client che comunica con esso.
+La sessione rappresenta sostanzialmente l'insieme dei dati che servono a identificare l'utente e a distinguere le richieste consentite in base a quelle precedenti.
+REST, acronimo di REpresentational State Transfer, non sfugge a questa definizione ma ne deriva e ne modifica i vincoli.
+Il paradigma è stato introdotto nella tesi di dottorato di Roy Fielding \cite{fielding2000architectural}, celebre informatico statunitense contemporaneo.
+Rispetto al tradizionale concetto di stato persistente mantenuto all'interno della parte server dell'applicativo, questo nuovo approccio definisce la comunicazione verso esso come 
+stateless, ovvero senza stato.
+In quest'ottica, un client che intenda usufruire di un particolare servizio del server dovrà fornire ad esso tutti i dati necessari perché la propria richiesta sia soddisfatta.
+Il server, d'altro canto, non avrà alcuna memoria rispetto alle differenti richieste giunte dal client, da cui la definizione di stateless (senza stato).
+Il principale vantaggio di non avere una sessione mantenuta nel backend è un enorme alleggerimento nella gestione di client differenti e/o non omogenei.
+Il ruolo del client, tuttavia, subisce un netto cambiamento: la sessione deve ora essere immagazzinata, infatti, in questa porzione dell'applicativo.
+A partire dalla dissertazione con cui Fielding introduce nel 2000 questo nuovo stile architetturale, REST è diventato uno standard de-facto per i più moderni servizi internet.
+Il progressivo arricchimento delle risorse disponibili ai client ha reso la manutenzione di una sessione progressivamente meno esosa in termini di costi di elaborazione e ha 
+sicuramente favorito la diffusione del pattern.
+Un ulteriore aspetto che ha permesso a diverse aziende di adottare REST come metodologia di sviluppo standard per sistemi distribuiti e non è l'indipendenza tra frontend e backend.
+Fintanto che l'interfaccia tra le due parti non viene modificata, infatti, i due progetti possono evolvere indipendentemente l'uno rispetto all'altro e possono essere realizzati 
+da team differenti o perfino da società diverse.
+\\
+Il nome scelto per l'applicazione è ReportManager.
+L'architettura API RESTful è stata implementata attraverso due distinti componenti: backend e frontend.
+
+\section{Il backend}
+
+Il backend è costituito da una web application, ovvero un software fruibile attraverso il web e in particolare tramite protocollo HTTP.
+Java è il linguaggio di programmazione di riferimento per questa parte del software e per tale ragione è stato impiegato il servlet container Tomcat per poter debuggare e poi
+mettere in produzione quanto realizzato.
+Il servlet container è un particolare strato che si frappone tra l'utenza del servizio e il compilato Java che esegue i comandi; è necessario perché fornisce già 
+la traduzione e il mapping delle chiamate HTTP, reindirizzandole agli endpoint definiti.
+In questo modo, prendendo l'esempio di una chiamata di tipo GET, verranno richiesti dati al giusto URL definito per questa interrogazione.
+Come anticipato, il framework di riferimento per questa porzione del progetto è Spring Boot.
+
+\section{Il frontend}
+
+Il frontend è costituito da una Single Page Application sviluppata, invece, con il framework Angular.
+Una Single Page Application, comunemente abbreviata con l'acronimo SPA, è fondamentalmente una pagina web caricata totalmente al primo accesso.
+Nel momento in cui un utente utilizza una SPA, nell'accedere all'URL corrispondente a essa otterrà immediatamente l'intero applicativo sul proprio browser.
+Il sistema si differenzia rispetto a una normale pagina internet poiché non c'è alcun rallentamento dovuto al caricamento di pagine intere nella navigazione; infatti, grazie 
+all'interattività fornita da linguaggi di scripting come JavaScript, i contenuti sono completamente dinamici e vengono aggiornati quasi in tempo reale.
+L'esperienza di fruizione risulta notevolmente appesantita solamente in una fase di caricamento iniziale, diventando pressoché istantanea nel prosieguo.
+L'impiego di tecniche asincrone come AJAX, inoltre, consente di raggiungere risultati che fino a qualche tempo addietro si pensavano impossibili.
+AJAX, acronimo di Asincronous JavaScript and XML, è una tecnica che consente di disaccoppiare l'invio e la ricezione di dati verso e da server dalla logica di presentazione delle 
+pagine web.
+AJAX non è una libreria e non è un linguaggio di programmazione; consente, tuttavia, di effettuare chiamate asincrone anziché sincrone.
+La sostanziale differenza sta nel fatto che una chiamata sincrona deve attendere un esito prima di proseguire con l'elaborazione mentre una asincrona no.
+La logica sincrona impedisce di procedere con il flusso dei dati e, eventualmente, di mostrare a video i risultati delle operazioni richieste dall'utente.
+Quella asincrona, viceversa, consente alle pagine di visualizzare le informazioni una volta pronte, una volta ricevute.
+\\
+Nel prossimo capitolo saranno approfonditi gli aspetti tecnologici legati ai framework utilizzati sia per il backend che per il frontend.

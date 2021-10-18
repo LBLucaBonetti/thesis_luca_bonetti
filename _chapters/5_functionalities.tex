@@ -153,7 +153,7 @@ INFOLOG ha bisogno di tenere monitorati i tempi che ogni sua figura del team Log
 Questo consente ai superiori di stabilire un rendiconto dei costi e di quanto prodotto per fini gestionali e commerciali.
 Per fare questo, è stato annesso a Jira il plugin WorklogPRO - Timesheets for Jira\footnote{https://marketplace.atlassian.com/apps/1212626/worklogpro-timesheets-for-jira?tab=overview\&hosting=datacenter}.
 WorklogPRO offre una comoda interfaccia per inserire un riassunto delle operazioni svolte e dell'arco temporale impiegato su un task specifico.
-Sia Jira che WorklogPRO offrono un'API RESTful per la comunicazione esterna. Grazie alla documentazione ben scritta e completa di entrambi, la loro integrazione risulta
+Sia Jira che WorklogPRO offrono API RESTful per la comunicazione esterna. Grazie alla documentazione ben scritta e completa di entrambi, la loro integrazione risulta
 particolarmente agevole.
 \\
 La pagina di gestione dei task di ReportManager offre all'utente del reparto Logistics tutto il necessario per creare, aggiornare e cancellare non solo i singoli task di Jira ma
@@ -210,7 +210,7 @@ un'operazione potenzialmente lenta.
 Lo spinner è un componente grafico costituito da un elemento rotante (come possono essere un semicerchio o una clessidra) che viene solitamente usato per questi scopi.
 L'operazione lenta in questione è la richiesta al backend per ottenere i dettagli dei report generati dal richiedente.
 Ottenuta la risposta, lo spinner viene nascosto e viene mostrata la lista ottenuta o un errore in caso di problemi occorsi durante la chiamata HTTP.
-La struttura dati che fa da base nel backend per i rapporti d'intervento è costituità da due entità distinte ma connesse:
+La struttura dati che fa da base nel backend per i rapporti d'intervento è costituita da due entità distinte ma connesse:
 \begin{itemize}
     \item \emph{ReportHeaderModel} - contenente i dati di testata
     \item \emph{ReportLineModel} - contenente i dati di dettaglio, o righe
